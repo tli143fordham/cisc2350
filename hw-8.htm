@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>nyt API call</title>
+    <style>
+        body {
+        font-family: 'Courier New', Courier, monospace;
+        padding: 50px;
+        text-align: center;
+        margin: auto;
+        width:fit-content;
+    }
+    input[type="text"]{
+        width: 400px;
+        padding: 10px;
+        margin-bottom: 20px;
+        font-family: 'Courier New', Courier, monospace;
+        
+    }
+    
+    </style>
+</head>
+<body>
+    <h1>NYT API Call</h1>
+    <p>Enter a search term to get articles from the New York Times API.</p>
+    <input type="text" id="inputPhrase" placeholder="Search the New York Times API">
+    <button id="searchButton" onClick="searchArticles()">Search</button>
+    <h1 id="result"></h1>
+</body>
+<script>
+    function searchArticles() {
+        // Create a new XMLHttpRequest object
+        var xhr = new XMLHttpRequest();
+        // Get the input value
+        const inputPhrase = document.getElementById("inputPhrase").value;
+        var url = "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=" + inputPhrase + "&api-key=kk30hRMmt8rfjtD7bYdSFXM7AXeyirQ9";
+            // Initialize a request
+            xhr.open("GET", url, true);
+
+            // When the request loads
+            xhr.onload = function () {
+                // Check if request is successful
+                if (xhr.status === 200) {
+                    // Parse JSON response
+                    var data = JSON.parse(xhr.responseText);
+                    var docs = data.response.docs
+                    // Generate output
+
+            var output = "<h3>Articles</h3>";
+            for (var i = 0; i < docs.length; i++) {
+                var headline = docs[i].headline.main; // Access headline
+                var snippet = docs[i].snippet; // Access snippet
+                output += "<p><strong>Headline:</strong> " + headline + "<br><br><strong>Blurb:</strong> " + snippet + "</p> <hr>";
+            }
+                    
+                    // Display the output
+                    document.getElementById("result").innerHTML = output;
+                } else {
+                    document.getElementById("result").innerHTML = "<p>Error fetching data.</p>";
+                }
+            };
+
+            // Handle network errors
+            xhr.onerror = function () {
+                document.getElementById("result").innerHTML = "<p>Network Error</p>";
+            };
+
+            // Send the request
+            xhr.send();
+        }
+</script>
+</html>

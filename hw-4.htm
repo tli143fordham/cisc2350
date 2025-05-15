@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>State → City → County → Village</title>
+    <style>
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            padding: auto;
+            display: grid;
+justify-content: center;
+align-items: center;
+            
+        }
+        select {
+            margin: 10px 0;
+            padding: 10px;
+            font-size: 16px;
+        }
+        label {
+            font-weight: bold;
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const data = {
+                "New York": {
+                    "New York City": {
+                        "Queens": ["Jackson Heights", "Flushing"],
+                        "Brooklyn": ["Sunset Park", "Williamsburg"]
+                    },
+                    "Long Island": {
+                        "Suffolk": ["Smithtown", "Huntington"],
+                        "Nassau": ["Garden City", "Hempstead"]
+                    }
+                },
+                "California": {
+                    "Los Angeles": {
+                        "Rowland Heights": ["Rowland", "Nogales"],
+                        "Littlerock": ["Palmdale", "Lancaster"]
+                    },
+                    "San Francisco": {
+                        "Fisherman's Wharf": ["Ghirardelli", "Van Ness"]
+                    }
+                },
+                "Texas": {
+                    "Austin": {
+                        "Downtown": ["Sixth Street", "Rainey Street"],
+                        "Pemberton": ["Northwood", "Lamar"]
+                    },
+                    "Houston": {
+                        "Downtown": ["Buffalo", "White Oak"]
+                    }
+                }
+            };
+
+            const stateSelect = document.getElementById("state");
+            const citySelect = document.getElementById("city");
+            const countySelect = document.getElementById("county");
+            const villageSelect = document.getElementById("village");
+
+            for (const state in data) {
+                const option = document.createElement("option");
+                option.value = state;
+                option.textContent = state;
+                stateSelect.appendChild(option);
+            }
+            stateSelect.addEventListener("change", function() { //for states
+                citySelect.innerHTML = "<option value=''>Select City</option>";
+                countySelect.innerHTML = "<option value=''>Select County</option>";
+                villageSelect.innerHTML = "<option value=''>Select Village</option>";
+
+                const selectedState = stateSelect.value;
+                if (selectedState && data[selectedState]) {
+                    for (const city in data[selectedState]) {
+                        const option = document.createElement("option");
+                        option.value = city;
+                        option.textContent = city;
+                        citySelect.appendChild(option);
+                    }
+                }
+            });
+
+            citySelect.addEventListener("change", function() { //for cities
+                countySelect.innerHTML = "<option value=''>Select County</option>";
+                villageSelect.innerHTML = "<option value=''>Select Village</option>";
+
+                const selectedState = stateSelect.value;
+                const selectedCity = citySelect.value;
+                if (selectedCity && data[selectedState][selectedCity]) {
+                    for (const county in data[selectedState][selectedCity]) {
+                        const option = document.createElement("option");
+                        option.value = county;
+                        option.textContent = county;
+                        countySelect.appendChild(option);
+                    }
+                }
+            });
+            countySelect.addEventListener("change", function() { //for counties
+                villageSelect.innerHTML = "<option value=''>Select Village</option>";
+
+                const selectedState = stateSelect.value;
+                const selectedCity = citySelect.value;
+                const selectedCounty = countySelect.value;
+                if (selectedCounty && data[selectedState][selectedCity][selectedCounty]) {
+                    for (const village of data[selectedState][selectedCity][selectedCounty]) {
+                        const option = document.createElement("option");
+                        option.value = village;
+                        option.textContent = village;
+                        villageSelect.appendChild(option);
+                    }
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>State → City → County → Village</h1>
+    <label for="state">State:</label>
+    <select id="state">
+        <option value="">Select State</option>
+    </select>
+    <br>
+    <label for="city">City:</label>
+    <select id="city">
+        <option value="">Select City</option>
+    </select>
+    <br>
+    <label for="county">County:</label>
+    <select id="county">
+        <option value="">Select County</option>
+    </select>
+    <br>
+    <label for="village">Village:</label>
+    <select id="village">
+        <option value="">Select Village</option>
+    </select>
+</body>
+</html>

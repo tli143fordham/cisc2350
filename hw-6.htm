@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>rearrange text by case</title>
+    </head>
+    <style>
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            padding: 50px;
+            text-align: center;
+            margin: auto;
+            width:fit-content;
+        }
+        input[type="text"]{
+            width: 200px;
+            padding: 10px;
+            margin-bottom: 20px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        
+    </style>
+    <body>
+        <input type="text" id="inputPhrase" placeholder="Enter a phrase">
+        <button id="moveButton" onClick="returnText">Rearrange Case</button>
+        <h1 id="result"></h1>
+    </body>
+    <script>
+        function returnText(){
+            const inputPhrase = document.getElementById("inputPhrase").value;
+            regexpUpper = inputPhrase.match(/[A-Z]/g);
+            regexpLower = inputPhrase.match(/[a-z]/g);
+            const rearrangedPhrase = regexpUpper.join('') + regexpLower.join('');
+            document.getElementById("result").innerHTML = "Rearranged Phrase: " + rearrangedPhrase;
+            };
+        document.getElementById("moveButton").addEventListener("click", returnText);
+        
+    </script>
+</html>
