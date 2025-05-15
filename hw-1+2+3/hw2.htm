@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>HW2</title>
+    </head>
+    <style>
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            justify-content: center;
+align-items: center;
+        }
+        h1, p {
+            text-align: center;
+        }
+        .left {
+            text-align: left;
+            padding-left: 25%;
+        }
+    </style>
+    <body>
+        <p> > Created a launch.json file within the Run and Debug View<br>
+            > Edited the launch.json file to reroute to my calculator.htm file<br>
+            > Ran the debugger, launching the htm in a new Chrome instance<br>
+            > Used the debugger to identify issues within my code, including adding breakpoints to particular areas of interest</p>
+            <h1>Launch.json text</h1>
+            <p class="left">{<br>
+                                // Use IntelliSense to learn about possible attributes.<br>
+                // Hover to view descriptions of existing attributes.<br>
+                // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+                "version": "0.2.0",<br>
+                "configurations": [<br>
+                    {<br>
+                        "name": "Launch Chrome",<br>
+                        "request": "launch",<br>
+                        "type": "chrome",<br>
+                        "url": "file:///C:/Users/space/OneDrive/Documents/cisc2350/site/homework/hw-1+2+3/calculator.htm",<br>
+                        "webRoot": "${workspaceFolder}"<br>
+                    },<br>
+                    {<br>
+                        "type": "chrome",<br>
+                        "request": "launch",<br>
+                        "name": "Open calculator.htm",<br>
+                        "file": "c:\\Users\\space\\OneDrive\\Documents\\cisc2350\\site\\homework\\hw-1+2+3\\calculator.htm"<br>
+                    }<br>
+                ]<br>
+            }</p>
+    </body>
+</html>

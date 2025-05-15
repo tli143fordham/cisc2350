@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>calculator</title>
+        <link rel="stylesheet" href="calcstyle.css">
+    </head>
+    <body>
+        <div class="calculator">
+            <input type="text" class="calculatorResult" id="output">
+            </div>
+            <div class="calculatorKeys">
+                <input type="button" value="+" class="calculatorKey calculatorOperator" onClick="display('+')"></input>
+                <input type="button" value="-" class="calculatorKey calculatorOperator" onClick="display('-')"></input>
+                <input type="button" value="*" class="calculatorKey calculatorOperator" onClick="display('*')"></input>
+                <input type="button" value="/" class="calculatorKey calculatorOperator" onClick="display('/')"></input>
+                <input type="button" value="7" class="calculatorKey" onClick="display('7')"></input>
+                <input type="button" value="8" class="calculatorKey" onClick="display('8')"></input>
+                <input type="button" value="9" class="calculatorKey" onClick="display('9')"></input>
+                <input type="button" value="4" class="calculatorKey" onClick="display('4')"></input>
+                <input type="button" value="5" class="calculatorKey" onClick="display('5')"></input>
+                <input type="button" value="6" class="calculatorKey" onClick="display('6')"></input>
+                <input type="button" value="1" class="calculatorKey" onClick="display('1')"></input>
+                <input type="button" value="2" class="calculatorKey" onClick="display('2')"></input>
+                <input type="button" value="3" class="calculatorKey" onClick="display('3')"></input>
+                <input type="button" value="0" class="calculatorKey zero" onClick="display('0')"></input>
+                <input type="button" value="." class="calculatorKey" onClick="display('.')"></input>
+                <input type="button" value="AC" class="calculatorKey" onClick="clearOutput()"></input>
+                <input type="button" value="=" class="calculatorKey calculatorEqual" onClick="solve()"></input>
+            </div>
+        </div>
+        <script>
+            function display(val){
+                document.getElementById('output').value += val
+                return val
+            }
+            function solve(){
+                let x = document.getElementById('output').value
+                let y = eval(x);
+                document.getElementById('output').value = y
+                return y
+            }
+            function clearOutput() {
+                console.log("Clear function called"); // Debugging log
+                document.getElementById('output').value = "";
+                return "";
+            }
+            //tutorial referenced -- https://www.simplilearn.com/tutorials/javascript-tutorial/calculator-in-javascript 
+        </script>
+    </body>
+</html>
